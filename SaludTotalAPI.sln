@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36202.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaludTotalAPI", "SaludTotalAPI.csproj", "{970611EF-AF90-4736-A049-19E7DFAEFFE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Consultoria_SaludTotal", "..\Consultoria_SaludTotal\Consultoria_SaludTotal.csproj", "{7402145C-8727-4688-9EE7-E5A7C3095D29}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{970611EF-AF90-4736-A049-19E7DFAEFFE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{970611EF-AF90-4736-A049-19E7DFAEFFE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{970611EF-AF90-4736-A049-19E7DFAEFFE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{970611EF-AF90-4736-A049-19E7DFAEFFE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7402145C-8727-4688-9EE7-E5A7C3095D29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7402145C-8727-4688-9EE7-E5A7C3095D29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7402145C-8727-4688-9EE7-E5A7C3095D29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7402145C-8727-4688-9EE7-E5A7C3095D29}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {05BDB9B2-9E9E-437D-9D20-B3BB2298C171}
+	EndGlobalSection
+EndGlobal
