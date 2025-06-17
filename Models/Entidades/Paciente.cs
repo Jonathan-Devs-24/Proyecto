@@ -29,7 +29,7 @@ namespace SaludTotalAPI.Models.Entidades
         [Column("correo")]
         public string Correo { get; set; } = null!;
 
-        [Column("nro_telf_movil")]
+        [Column("nro_telf")]
         public long? Telefono { get; set; }
     }
 }

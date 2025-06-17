@@ -7,8 +7,6 @@ namespace SaludTotalAPI.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-
-
         // Entidades
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Paciente> Pacientes { get; set; }
@@ -18,15 +16,13 @@ namespace SaludTotalAPI.Data
         public DbSet<Informe> Informes { get; set; }
         public DbSet<Profesional_Especialidad> Profesional_Especialidades { get; set; }
         public DbSet<Disponibilidad> Disponibilidades { get; set; }
-     
 
-
-        // OnModelCreating permite configurar las relaciones y restricciones de la base de datos
+        // OnModelCreating para configurar las relaciones y restricciones de la base de datos
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // FORZAR nombres de tablas (opcional, si no usás [Table("...")])
+            // FORZAR nombres de tablas... por si acaso
             modelBuilder.Entity<Usuario>().ToTable("Usuario");
             modelBuilder.Entity<Paciente>().ToTable("Paciente");
             modelBuilder.Entity<Profesional>().ToTable("Profesional");
@@ -35,7 +31,6 @@ namespace SaludTotalAPI.Data
             modelBuilder.Entity<Disponibilidad>().ToTable("Disponibilidad");
             modelBuilder.Entity<Turno>().ToTable("Turno");
             modelBuilder.Entity<Informe>().ToTable("Informe");
-
 
             // Configuración que permite relaciones entre profesionales y especialidades Uno a Muchos
             modelBuilder.Entity<Profesional_Especialidad>()
@@ -66,7 +61,6 @@ namespace SaludTotalAPI.Data
                         .HasForeignKey(t => t.Id_Profesional)
                         .OnDelete(DeleteBehavior.Restrict);
 
-
             // Configuración que permite relaciones entre informes y turnos Uno a Muchos
             modelBuilder.Entity<Informe>()
                         .HasOne(i => i.Turno)
@@ -80,10 +74,7 @@ namespace SaludTotalAPI.Data
                         .WithMany()
                         .HasForeignKey(d => d.Id_Profesional)
                         .OnDelete(DeleteBehavior.Restrict);
-
         }
-
-
     }
 }
 

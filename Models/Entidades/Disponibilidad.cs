@@ -16,25 +16,12 @@ namespace SaludTotalAPI.Models.Entidades
         public int Id_Profesional { get; set; }
 
         [Required]
-        [Column ("fecha_hora_inicio")]
-        public DateTime Fecha_Hora_Inicio { get; set; }
+        [Column("max_turnos")]
+        public int Max_Turnos { get; set; }
 
         [Required]
-        [Column ("fecha_hora_fin")]
-        public DateTime Fecha_Hora_Fin { get; set;}
-
-        [Required]
-        [Column ("duracion_turno_minutos")]
-        public int Duracion_Turno_Minutos { get; set; }
-
-        [Required]
-        [Column ("cantidad_maxima_turno")]
-        public int Cantidad_Maximo_Turno { get; set; }
-
-        [Required]
-        [Column("estado_disponibilidad")]
-        public string Estado_Disponibilidad { get; set; } = "Disponible";
-
+        [Column("dia_semana")]
+        public int Dia_Semana { get; set; }
 
         public Profesional? Profesional { get; set; }
     }

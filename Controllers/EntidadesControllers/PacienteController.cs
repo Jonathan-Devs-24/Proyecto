@@ -37,6 +37,9 @@ namespace SaludTotalAPI.Controllers.EntidadesControllers
         [HttpPost]
         public async Task<ActionResult<Paciente>> CreatePaciente(Paciente paciente)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             _context.Pacientes.Add(paciente);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetPaciente), new { id = paciente.Id }, paciente);

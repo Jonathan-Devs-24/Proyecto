@@ -40,6 +40,9 @@ namespace SaludTotalAPI.Controllers.EntidadesControllers
         [HttpPost]
         public async Task<ActionResult<Informe>> CreateInforme(Informe informe)
         {
+            if (ModelState.IsValid)
+                return BadRequest(ModelState);
+
             _context.Informes.Add(informe);
             await _context.SaveChangesAsync();
 

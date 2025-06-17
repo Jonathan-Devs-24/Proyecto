@@ -40,6 +40,9 @@ namespace SaludTotalAPI.Controllers.EntidadesControllers
         [HttpPost]
         public async Task<ActionResult<Usuario>> CreateUsuario(Usuario usuario)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetUsuario), new { id = usuario.Id_Usuario }, usuario);

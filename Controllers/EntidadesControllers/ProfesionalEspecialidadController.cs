@@ -42,6 +42,9 @@ namespace SaludTotalAPI.Controllers.EntidadesControllers
         [HttpPost]
         public async Task<ActionResult<Profesional_Especialidad>> CreateProfesionalEspecialidad(Profesional_Especialidad profesionalEspecialidad)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             _context.Profesional_Especialidades.Add(profesionalEspecialidad);
             await _context.SaveChangesAsync();
 
@@ -66,6 +69,22 @@ namespace SaludTotalAPI.Controllers.EntidadesControllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+
+        [HttpGet("especialidad/{idEspecialidad}")]
+        public async Task<ActionResult<IEnumerable<Profesional>>> GetProfesionalesPorEspecialidad(int idEspecialidad)
+        {
+            var profesionales = await _context.Profesional_Especialidades
+                .Where(pe => pe.Id_Especialidad == idEspecialidad)
+                .Include(pe => pe.Profesional) // Importante para traer los datos completos del profesional
+                .Select(pe => pe.Profesional)
+                .ToListAsync();
+
+            if (profesionales == null || profesionales.Count == 0)
+                return NotFound("No hay profesionales para esta especialidad.");
+
+            return Ok(profesionales);
         }
     }
 }

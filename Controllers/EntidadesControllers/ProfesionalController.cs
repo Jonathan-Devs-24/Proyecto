@@ -34,10 +34,42 @@ namespace SaludTotalAPI.Controllers.EntidadesControllers
             return profesional;
         }
 
+        // GET: api/Profesional/nombre/{nombre}
+        [HttpGet("disponibilidad/{idProfesional}/{fecha}")]
+        public async Task<IActionResult> VerificarDisponibilidad(int idProfesional, DateTime fecha)
+        {
+            // Obtener los turnos programados para ese profesional en esa fecha
+            var turnosTomados = await _context.Turnos
+                .Where(t => t.Id_Profesional == idProfesional && t.Fecha_Turno.Date == fecha.Date)
+                .CountAsync();
+
+            // Restricción: máximo 4 turnos por día
+            bool disponible = turnosTomados < 4;
+
+            return Ok(new { disponible });
+        }
+
+        // GET: api/Profesional/especialidad/5
+        [HttpGet("especialidad/{idEspecialidad}")]
+        public async Task<ActionResult<IEnumerable<Profesional>>> GetProfesionalesPorEspecialidad(int idEspecialidad)
+        {
+            var profesionales = await _context.Profesional_Especialidades
+                .Where(pe => pe.Id_Especialidad == idEspecialidad)
+                .Include(pe => pe.Profesional)
+                .Select(pe => pe.Profesional)
+                .Distinct()
+                .ToListAsync();
+
+            return profesionales;
+        }
+
         // POST: api/Profesional
         [HttpPost]
         public async Task<ActionResult<Profesional>> CreateProfesional(Profesional profesional)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             _context.Profesionales.Add(profesional);
             await _context.SaveChangesAsync();
 
@@ -71,19 +103,7 @@ namespace SaludTotalAPI.Controllers.EntidadesControllers
             return NoContent();
         }
 
-        // GET: api/Profesional/especialidad/5
-        [HttpGet("especialidad/{idEspecialidad}")]
-        public async Task<ActionResult<IEnumerable<Profesional>>> GetProfesionalesPorEspecialidad(int idEspecialidad)
-        {
-            var profesionales = await _context.Profesional_Especialidades
-                .Where(pe => pe.Id_Especialidad == idEspecialidad)
-                .Include(pe => pe.Profesional)
-                .Select(pe => pe.Profesional)
-                .Distinct()
-                .ToListAsync();
-
-            return profesionales;
-        }
+        
 
     }
 }

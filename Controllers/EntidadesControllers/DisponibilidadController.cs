@@ -30,9 +30,51 @@ namespace SaludTotalAPI.Controllers.EntidadesControllers
             return disponibilidad;
         }
 
+        [HttpGet("verificar/{idProfesional}/{fecha}")]
+        public async Task<IActionResult> VerificarDisponibilidad(int idProfesional, DateTime fecha)
+        {
+            // Obtener el día de la semana (1 = lunes, 7 = domingo)
+            int diaSemana = (int)fecha.DayOfWeek;
+            if (diaSemana == 0) diaSemana = 7;
+
+            // Buscar la disponibilidad para ese profesional y ese día de la semana
+            var disponibilidad = await _context.Disponibilidades
+                .FirstOrDefaultAsync(d => d.Id_Profesional == idProfesional && d.Dia_Semana == diaSemana);
+
+            if (disponibilidad == null)
+            {
+                return NotFound(new { mensaje = "El profesional no tiene disponibilidad para ese día." });
+            }
+
+            // Contar la cantidad de turnos ya reservados para ese profesional y esa fecha (excepto cancelados)
+            int turnosReservados = await _context.Turnos
+                .CountAsync(t => t.Id_Profesional == idProfesional &&
+                                 t.Fecha_Turno.Date == fecha.Date &&
+                                 t.Estado_Turno != "Cancelado");
+
+            // Verificar si quedan cupos disponibles
+            int cuposDisponibles = disponibilidad.Max_Turnos - turnosReservados;
+
+            return Ok(new
+            {
+                fecha = fecha.Date.ToString("yyyy-MM-dd"),
+                profesional = idProfesional,
+                cupos_disponibles = cuposDisponibles,
+                max_turnos = disponibilidad.Max_Turnos,
+                disponible = cuposDisponibles > 0
+            });
+        }
+
+
+
+
+
         [HttpPost]
         public async Task<ActionResult<Models.Entidades.Disponibilidad>> CreateDisponibilidad(Models.Entidades.Disponibilidad disponibilidad)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             _context.Disponibilidades.Add(disponibilidad);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetDisponibilidad), new { id = disponibilidad.Id_Disponibilidad }, disponibilidad);

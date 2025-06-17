@@ -38,6 +38,9 @@ namespace SaludTotalAPI.Controllers.EntidadesControllers
         [HttpPost]
         public async Task<ActionResult<Especialidad>> CreateEspecialidad(Especialidad especialidad)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             _context.Especialidades.Add(especialidad);
             await _context.SaveChangesAsync();
 

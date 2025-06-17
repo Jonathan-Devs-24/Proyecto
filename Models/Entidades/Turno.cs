@@ -16,15 +16,29 @@ namespace SaludTotalAPI.Models.Entidades
         public int Id_Paciente { get; set; }
 
         [Required]
+        [ForeignKey("Especialidad")]
+        [Column("id_especialidad")]
+        public int Id_Especialidad { get; set; }
+
+        [Required]
         [ForeignKey("Profesional")]
         [Column("id_profesional")]
         public int Id_Profesional { get; set; }
+
+        [Required]
+        [Column ("fecha_turno")]
+        public DateTime Fecha_Turno { get; set; }
+
+        [Column("observaciones")]
+        public string? Observaciones { get; set; }
 
         [Required]
         [Column("estado_turno")]
         public string Estado_Turno { get; set; }
 
         public Paciente? Paciente { get; set; }
+        public Especialidad? Especialidad { get; set; }
         public Profesional? Profesional { get; set; }
+    
     }
 }
