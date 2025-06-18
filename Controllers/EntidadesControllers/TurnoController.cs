@@ -106,6 +106,9 @@ namespace SaludTotalAPI.Controllers.EntidadesControllers
 
             return Ok(cantidad);
         }
+
+        
+
     }
 }
 

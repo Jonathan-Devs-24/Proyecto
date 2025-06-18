@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SaludTotalAPI.Models.Entidades;
+using SaludTotalAPI.Models.View;
+
 
 namespace SaludTotalAPI.Data
 {
@@ -16,6 +18,9 @@ namespace SaludTotalAPI.Data
         public DbSet<Informe> Informes { get; set; }
         public DbSet<Profesional_Especialidad> Profesional_Especialidades { get; set; }
         public DbSet<Disponibilidad> Disponibilidades { get; set; }
+
+        // Vistas
+        public DbSet<VistaTurnoDetallado> VistaTurnosDetallada { get; set; }
 
         // OnModelCreating para configurar las relaciones y restricciones de la base de datos
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -74,7 +79,13 @@ namespace SaludTotalAPI.Data
                         .WithMany()
                         .HasForeignKey(d => d.Id_Profesional)
                         .OnDelete(DeleteBehavior.Restrict);
+
+            // Vistas
+            modelBuilder.Entity<VistaTurnoDetallado>()
+                        .HasNoKey()
+                        .ToView("VistaTurnoDetallado");
         }
     }
 }
+
 

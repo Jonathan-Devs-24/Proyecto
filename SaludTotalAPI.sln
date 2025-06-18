@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaludTotalAPI", "SaludTotal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Consultoria_SaludTotal", "..\Consultoria_SaludTotal\Consultoria_SaludTotal.csproj", "{7402145C-8727-4688-9EE7-E5A7C3095D29}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaludTotalWeb", "..\SaludTotalWeb\SaludTotalWeb.csproj", "{584C9EA9-400C-4493-BAEE-60E9C1C3E2BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7402145C-8727-4688-9EE7-E5A7C3095D29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7402145C-8727-4688-9EE7-E5A7C3095D29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7402145C-8727-4688-9EE7-E5A7C3095D29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{584C9EA9-400C-4493-BAEE-60E9C1C3E2BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{584C9EA9-400C-4493-BAEE-60E9C1C3E2BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{584C9EA9-400C-4493-BAEE-60E9C1C3E2BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{584C9EA9-400C-4493-BAEE-60E9C1C3E2BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
