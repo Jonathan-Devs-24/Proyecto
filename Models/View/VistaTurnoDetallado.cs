@@ -6,7 +6,8 @@ namespace SaludTotalAPI.Models.View
     [ViewComponent(Name = "VistaTurnoDetallado")]
     public class VistaTurnoDetallado
     {
-        
+        public int? IdPaciente { get; set; }  // Nullable en el modelo
+
         public int IdTurno { get; set; }
         public string NombrePaciente { get; set; }
         public string NombreProfesional { get; set; }

@@ -21,4 +21,18 @@ public class VistaTurnoDetalladoController : ControllerBase
         var turnos = await _context.VistaTurnosDetallada.ToListAsync();
         return Ok(turnos);
     }
+
+    // GET: api/VistaTurnoDetallado/paciente/{idPaciente}
+    [HttpGet("paciente/{idPaciente}")]
+    public async Task<ActionResult<IEnumerable<VistaTurnoDetallado>>> GetPorPaciente(int idPaciente)
+    {
+        var turnos = await _context.VistaTurnosDetallada
+            .Where(t => t.IdTurno > 0 && t.NombrePaciente != null) // opcional: protección
+            .Where(t => _context.Pacientes
+                .Any(p => p.Id == idPaciente && (p.Nombre + " " + p.Apellido) == t.NombrePaciente))
+            .ToListAsync();
+
+        return Ok(turnos);
+    }
+
 }
