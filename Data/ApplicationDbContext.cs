@@ -18,9 +18,11 @@ namespace SaludTotalAPI.Data
         public DbSet<Informe> Informes { get; set; }
         public DbSet<Profesional_Especialidad> Profesional_Especialidades { get; set; }
         public DbSet<Disponibilidad> Disponibilidades { get; set; }
+        public DbSet<TurnoOnline> TurnosOnline { get; set; }
 
         // Vistas
         public DbSet<VistaTurnoDetallado> VistaTurnosDetallada { get; set; }
+        public DbSet<TurnoOnlineRecibido> TurnosOnlineRecibidos { get; set; }
 
         // OnModelCreating para configurar las relaciones y restricciones de la base de datos
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -36,6 +38,7 @@ namespace SaludTotalAPI.Data
             modelBuilder.Entity<Disponibilidad>().ToTable("Disponibilidad");
             modelBuilder.Entity<Turno>().ToTable("Turno");
             modelBuilder.Entity<Informe>().ToTable("Informe");
+            modelBuilder.Entity<TurnoOnline>().ToTable("TurnoOnline");
 
             // Configuración que permite relaciones entre profesionales y especialidades Uno a Muchos
             modelBuilder.Entity<Profesional_Especialidad>()
@@ -81,9 +84,16 @@ namespace SaludTotalAPI.Data
                         .OnDelete(DeleteBehavior.Restrict);
 
             // Vistas
+
+            // Vista TurnoDetallado
             modelBuilder.Entity<VistaTurnoDetallado>()
                         .HasNoKey()
                         .ToView("VistaTurnoDetallado");
+            // Vista TurnoOnlineRecibido
+            modelBuilder.Entity<TurnoOnlineRecibido>()
+                        .HasNoKey()
+                        .ToView("TurnoOnlineRecibido");
+
         }
     }
 }
